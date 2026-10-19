@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
   Widget build(BuildContext context) {
-    final Color capaMoradaFigma = const Color(0xFF9E7DFF).withValues(alpha: 0.25);
+    final Color capaMoradaFigma = const Color(0xFF9E7DFF)
+        .withValues(alpha: 0.25);
 
     return Container(
       decoration: BoxDecoration(
-        
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           stops: const [0.0, 0.39, 0.88],
@@ -28,17 +33,19 @@ class MainScreen extends StatelessWidget {
         body: ListView(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
               child: Container(
                 //"¿Qué guardarás hoy?"
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 22.0,
+                  horizontal: 16.0,
+                ),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [
-                      Color(0xFF8CA6DB),
-                      Color(0xFF7B92C4),
-                    ],
+                    colors: [Color(0xFF8CA6DB), Color(0xFF7B92C4)],
                   ),
                   borderRadius: BorderRadius.circular(24.0),
                   border: Border.all(
@@ -53,27 +60,19 @@ class MainScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Card(
-                  elevation: 0,
-                  color: Colors.transparent,
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 22.0, horizontal: 16.0),
-                      child: Text(
-                        "¿Qué guardarás hoy?",
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                child: const Text(
+                  "¿Qué guardarás hoy?",
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
+
             const Padding(
-              padding: EdgeInsets.all(25.0),
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
               child: Row(
                 children: [
                   Icon(Icons.access_time_filled, color: Colors.white, size: 22),
@@ -89,9 +88,11 @@ class MainScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 200,),
+
+            SizedBox(height: 200),
+            
             const Padding(
-              padding: EdgeInsets.all(25.0),
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
               child: Row(
                 children: [
                   Icon(Icons.assignment, color: Colors.white, size: 22),
@@ -126,10 +127,7 @@ class MainScreen extends StatelessWidget {
             gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF6E7EA2),
-                Color(0xFF586484),
-              ],
+              colors: [Color(0xFF6E7EA2), Color(0xFF586484)],
             ),
           ),
           child: NavigationBarTheme(
@@ -210,20 +208,32 @@ class MainScreen extends StatelessWidget {
         child: IconButton(
           padding: EdgeInsets.zero,
           onPressed: () {},
-          icon: const Icon(Icons.account_circle_outlined, size: 32, color: Colors.white),
+          icon: const Icon(
+            Icons.account_circle_outlined,
+            size: 32,
+            color: Colors.white,
+          ),
         ),
       ),
       leadingWidth: 60.0,
       actions: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.notifications_none, size: 28.0, color: Colors.white),
+          icon: const Icon(
+            Icons.notifications_none,
+            size: 28.0,
+            color: Colors.white,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.settings_outlined, size: 28.0, color: Colors.white),
+            icon: const Icon(
+              Icons.settings_outlined,
+              size: 28.0,
+              color: Colors.white,
+            ),
           ),
         ),
       ],
