@@ -5,107 +5,225 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.indigo.shade200,
-      extendBodyBehindAppBar: false,
-      appBar: miAppBar(), //llama a la funcion miAppBar para crear el appbar
+    final Color capaMoradaFigma = const Color(0xFF9E7DFF).withValues(alpha: 0.25);
 
-      body: ListView(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 25, right: 25, top: 25),
-            child: Card.outlined(
-              elevation: 20,
-              color: Colors.indigo.shade200,
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    "¿Qué guardarás hoy?",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+    return Container(
+      decoration: BoxDecoration(
+        
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          stops: const [0.0, 0.39, 0.88],
+          colors: [
+            Color.alphaBlend(capaMoradaFigma, const Color(0xFF8ABCDB)), // 0%
+            Color.alphaBlend(capaMoradaFigma, const Color(0xFF6A91A8)), // 39%
+            Color.alphaBlend(capaMoradaFigma, const Color(0xFF53687E)), // 88%
+          ],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        extendBodyBehindAppBar: false,
+        appBar: miAppBar(),
+
+        body: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 25),
+              child: Container(
+                //"¿Qué guardarás hoy?"
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFF8CA6DB),
+                      Color(0xFF7B92C4),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(24.0),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.28),
+                    width: 1.2,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF283552).withValues(alpha: 0.45),
+                      blurRadius: 10,
+                      offset: const Offset(-5, 8),
+                    ),
+                  ],
+                ),
+                child: const Card(
+                  elevation: 0,
+                  color: Colors.transparent,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 22.0, horizontal: 16.0),
+                      child: Text(
+                        "¿Qué guardarás hoy?",
+                        style: TextStyle(
+                          fontSize: 28,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
+            const Padding(
+              padding: EdgeInsets.all(25.0),
+              child: Row(
+                children: [
+                  Icon(Icons.access_time_filled, color: Colors.white, size: 22),
+                  SizedBox(width: 10),
+                  Text(
+                    "Últimos objetos",
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 200,),
+            const Padding(
+              padding: EdgeInsets.all(25.0),
+              child: Row(
+                children: [
+                  Icon(Icons.assignment, color: Colors.white, size: 22),
+                  SizedBox(width: 10),
+                  Text(
+                    "Acciones",
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+
+        //BARRA DE NAVEGACIÓN
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+            border: Border(
+              top: BorderSide(
+                color: Colors.white.withValues(alpha: 0.2),
+                width: 1,
+              ),
+            ),
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF6E7EA2),
+                Color(0xFF586484),
+              ],
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: Row(children: [
-              Icon(Icons.punch_clock, color: Colors.white,),
-              SizedBox(width: 10,),
-              Text("Últimos objetos", style: TextStyle(fontSize: 20, color: Colors.white),)
-            ],),
-          )
-        ],
+          child: NavigationBarTheme(
+            data: NavigationBarThemeData(
+              labelTextStyle: WidgetStateProperty.all(
+                const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            child: NavigationBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              onDestinationSelected: (int index) {},
+              indicatorColor: Colors.white.withValues(alpha: 0.18),
+              selectedIndex: 0,
+              destinations: const <Widget>[
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.groups, color: Colors.white),
+                  icon: Icon(Icons.groups_outlined, color: Colors.white),
+                  label: 'Mi circulo',
+                ),
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.add, color: Colors.white),
+                  icon: Icon(Icons.add, color: Colors.white),
+                  label: 'Nuevo Articulo',
+                ),
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.videocam, color: Colors.white),
+                  icon: Icon(Icons.videocam_outlined, color: Colors.white),
+                  label: 'Escanear',
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
 
-  ///appbar de la aplicación con tituo, y 3 iconos
   AppBar miAppBar() {
     return AppBar(
-      centerTitle: true, //Titulo centrado en el appbar
+      centerTitle: true,
       backgroundColor: Colors.transparent,
+      elevation: 0,
       title: Container(
-        //container alrededor del titulo para darle un fondo y sombra
-        width: 200,
-        height: 40,
+        width: 180,
+        height: 35,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(72, 255, 255, 255),
+          color: const Color(0xFF889FD0),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: 0.35),
+            width: 1,
+          ),
           boxShadow: [
-            //da la ilusion de profundidad al titulo
             BoxShadow(
-              color: const Color.fromARGB(78, 63, 81, 181),
-              offset: Offset(-2, 10),
+              color: const Color(0xFF283552).withValues(alpha: 0.45),
+              offset: const Offset(-4, 6),
               blurRadius: 6,
             ),
           ],
-          borderRadius: BorderRadius.circular(
-            20.0,
-          ), //borde redondeado del container
+          borderRadius: BorderRadius.circular(20.0),
         ),
-        child: Text(
+        child: const Text(
           "Found it!",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 16,
+          ),
         ),
       ),
       leading: Padding(
-        //icono de usuario en el appbar
-        padding: const EdgeInsets.only(left: 8.0),
-        child: CircleAvatar(
-          radius: 10,
-          backgroundColor: const Color.fromARGB(49, 255, 255, 255),
-          child: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.person, size: 30, color: Colors.white),
-          ),
+        padding: const EdgeInsets.only(left: 16.0),
+        child: IconButton(
+          padding: EdgeInsets.zero,
+          onPressed: () {},
+          icon: const Icon(Icons.account_circle_outlined, size: 32, color: Colors.white),
         ),
       ),
       leadingWidth: 60.0,
       actions: [
-        //iconos de notificaciones y configuracion en el appbar
-        Padding(
-          padding: EdgeInsets.only(right: 2.0),
-          child: IconButton(
-            onPressed: () {}, //sera interactivo en el futuro para mostrar notificaciones
-            icon: const Icon(
-              Icons.notifications,
-              size: 30.0,
-              color: Colors.white,
-            ),
-          ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.notifications_none, size: 28.0, color: Colors.white),
         ),
-        //SizedBox(width: 20),
         Padding(
-          padding: EdgeInsets.only(right: 2.0),
+          padding: const EdgeInsets.only(right: 8.0),
           child: IconButton(
-            onPressed: () {}, //sera interactivo en el futuro para mostrar configuraciones
-            icon: const Icon(Icons.settings, size: 30.0, color: Colors.white),
+            onPressed: () {},
+            icon: const Icon(Icons.settings_outlined, size: 28.0, color: Colors.white),
           ),
         ),
       ],
